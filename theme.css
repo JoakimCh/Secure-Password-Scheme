@@ -1,0 +1,139 @@
+
+:root {
+  /* Colors: */
+  --back: #121212;
+  --text: #bfbfbf;
+  --text-light: #f5f5f5;
+  --border: rgba(255,255,255, .2);
+  --t-border-vsoft: rgba(255,255,255, .01);
+  --t-border-soft: rgba(255,255,255, .2);
+  --t-border-strong: rgba(255,255,255, .4);
+  --t-border-vstrong: rgba(255,255,255, .6);
+  --outline: #5C5C5C;
+  --color-1: rgb(202, 202, 202);
+  --color-2: rgb(143, 143, 143);
+  --shade-medium: 0.4;
+  --gradient-1: linear-gradient(to bottom, #292929 0%,#141414 100%);
+  --gradient-2: linear-gradient(to bottom, #141414 0%,#292929 100%);
+  --selected: #c7b53f;
+}
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none; /* we change border instead */
+  user-select: none;
+  color: var(--text);
+  background-color: var(--back);
+}
+
+/* #region elements */
+/* Make inline elements be inline-block so they can have a margin. */
+b, big, i, small, tt
+abbr, acronym, cite, code, dfn, em, kbd, strong, samp, var
+a, bdo, br, img, map, object, q, script, span, sub, sup
+button, input, label, select, textarea {
+  display: inline-block;
+}
+
+input {
+  width: 100%;
+  height: 28px;
+  padding: 2px;
+  border: none;
+  border-bottom: solid 1px var(--t-border-soft);
+  margin-bottom: 1px;
+  /* background-color: var(--back); */
+}
+
+button, input[type="button"] {
+  height: 28px;
+  cursor: pointer;
+  border: 1px solid var(--t-border-soft);
+  border-radius: 5px;
+  background-image: var(--gradient-1);
+  background-clip: padding-box; /* fixes border on top of gradient */
+}
+
+fieldset {
+  border: 1px solid var(--t-border-strong);
+  padding: 6px 10px;
+  margin: 5px 0;
+  width: 100%
+}
+
+h1, label, legend {color: var(--text-light)}
+
+h1 {margin: 10px 0px 0px 0px; font-size: 20pt}
+
+p {margin: 10px 0px 5px 0px}
+
+legend {font-weight: bold}
+/* #endregion */
+
+/* #region states (:focus, etc) */
+:focus, :active {
+  border-color: var(--t-border-vstrong);
+}
+
+button:active, input[type="button"]:active {
+  background-image: var(--gradient-2);
+}
+
+button:hover, input[type="button"]:hover {
+  color: var(--selected);
+}
+
+label:hover, label:focus-within {
+  color: var(--selected);
+}
+/* #endregion */
+
+/* #region classes */
+h1.long {display: none}
+.noTopMargin {margin-top: 0px}
+.smallTopMargin {margin-top: 5px}
+.noYMargins {margin-top: 0px; margin-bottom: 0px}
+.expTitle {visibility: visible; margin-bottom: 15px}
+.spanGridCols {grid-column: 1 / -1}
+.grid {display: grid; gap: 10px}
+.centerFlex {display: flex; justify-content: center}
+.flexSpacer {flex-grow: 1}
+.con_labelAndPassword {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: right;
+  gap: 5px
+}
+.generatedPw {
+  flex: content; 
+  font-family: 'Courier New', Courier, monospace;
+  max-width: fit-content;
+}
+.con_labelAndPassword > label {padding-top: 5px}
+/* #endregion */
+
+/* #region IDs */
+#con_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto; max-width: 700px;
+}
+#con_generatedPasswords {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+/* #con_generatedPasswords:has(> :nth-child(2)) {display: unset;} bugzilla #1774588 */
+/* #endregion */
+
+/* #region media queries */
+@media (min-width: 700px) {
+  h1.short {display: none}
+  h1.long {display: block}
+  .expTitle {visibility: hidden; margin-bottom: 0px}
+  .grid {grid-template-columns: repeat(3, 1fr)}
+}
+/* #endregion */

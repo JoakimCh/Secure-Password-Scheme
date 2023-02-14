@@ -1,0 +1,22 @@
+
+/* This is just a color theme which will be applied to the default theme. */
+
+/* @import 'theme.css'; */
+
+:root {
+  --back: #eeeeee;
+  --text: rgb(24, 24, 24);
+  --text-light: #000000;
+  --border: rgba(0,0,0, .2);
+  --t-border-vsoft: rgba(0,0,0, .01);
+  --t-border-soft: rgba(0,0,0, .2);
+  --t-border-strong: rgba(0,0,0, .4);
+  --t-border-vstrong: rgba(0,0,0, .6);
+  --outline: rgb(68, 68, 68);
+  --color-1: rgb(202, 202, 202);
+  --color-2: rgb(143, 143, 143);
+  --shade-medium: 0.4;
+  --gradient-1: linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+  --gradient-2: linear-gradient(to bottom, #e5e5e5 0%,#ffffff 100%);
+  --selected: #e96f28;
+}
