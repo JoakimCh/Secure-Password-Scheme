@@ -163,7 +163,6 @@ async function updateIdSeed(personalSeedInput) {
       ctx.fillRect(x*blockSize, ((numBlocks-2)-y)*blockSize, blockSize, blockSize)
     }
   }
-  console.log(personalSeedHash)
 }
 
 function clearIdCanvas() {
@@ -372,7 +371,7 @@ try {
   })
 } catch {} // ignore any error
 
-const log = console.log
+// const log = console.log
 const [inp_person, inp_birthdate, inp_master] = document.getElementById('frm_personalSeed')
 const {inp_service, inp_login, inp_iteration} = document.getElementById('frm_serviceSeed')
 const           {frm_personalSeed,   frm_serviceSeed,   btn_downloadId,   btn_shred,   btn_generate,   inp_countdown} = 
