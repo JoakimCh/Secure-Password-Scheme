@@ -17,14 +17,7 @@ function initLightSwitch(stylesheetId, buttonId) {
 }
 
 async function registerServiceWorker(url, options, installButtonId) {
-  let registration
-  try {
-    if ('serviceWorker' in navigator) registration = await navigator.serviceWorker.register(url, {
-      type: 'module',
-      ...options
-    })
-  } catch {} // ignore any error
-  if (registration && installButtonId) {
+  if (installButtonId) {
     window.addEventListener('beforeinstallprompt', async e => {
       e.preventDefault()
       const deferredPrompt = e
@@ -38,6 +31,13 @@ async function registerServiceWorker(url, options, installButtonId) {
       })
     })
   }
+  let registration
+  try {
+    if ('serviceWorker' in navigator) registration = await navigator.serviceWorker.register(url, {
+      type: 'module',
+      ...options
+    })
+  } catch {} // ignore any error
   return registration
 }
 
