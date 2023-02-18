@@ -5,26 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="An application to manage your passwords securely and accessible to all your devices without needing to store them anywhere or sync any data since they're procedurally generated on demand.">
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.png">
 <meta name="theme-color" content="#121212">
 <link rel="stylesheet" href="theme.css">
-<link id="css_light" rel="stylesheet" href="lights_on.css" disabled>
+<link rel="stylesheet" href="light.css" id="css_light" disabled>
 <!-- Feel free to inspect the code, all of it is in the script below: -->
 <script type="module" src="code.js"></script>
-<script type="module"> // module to control "lights on" / "lights off"
-  const stylesheet = document.getElementById('css_light')
-  const lightSwitch = document.getElementById('btn_light')
-  function colorSchemeChange(dark) {
-    if (typeof dark == 'string') dark = dark == 'true'
-    stylesheet.disabled = dark
-    lightSwitch.innerText = dark ? 'Lights on' : 'Lights off'
-    localStorage.setItem('dark', dark)
-  }
-  const mql = window.matchMedia('(prefers-color-scheme: dark)')
-  mql.addEventListener('change', e => colorSchemeChange(e.matches))
-  colorSchemeChange(localStorage.getItem('dark') ?? mql.matches)
-  lightSwitch.addEventListener('click', () => colorSchemeChange(!stylesheet.disabled))
-</script>
 <button id="btn_light" tabindex="-1" style="position: absolute">Lights on</button>
 <button id="btn_install" tabindex="-1" style="position: absolute; right: 8px" hidden>Install</button>
 <div id="con_main">
@@ -86,5 +73,6 @@
   </fieldset>
   <p style="text-align: center">This application is open source (MIT license) and <a href="https://github.com/JoakimCh/Secure-Password-Scheme">available on GitHub</a> free for anyone to inspect!</p>
   <p style="text-align: center; max-width: 600px;">Developed by Joakim L. Christiansen. Please <a href="https://github.com/sponsors/JoakimCh">sponsor me on GitHub</a>!</p>
+  <p style="text-align: center" id="sw_build">Application build:</p>
 </div>
 

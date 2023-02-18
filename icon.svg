@@ -1,91 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="144"
-   height="144"
-   viewBox="0 0 38.099999 38.1"
-   version="1.1"
-   id="svg12"
-   sodipodi:docname="icon.svg"
-   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
-     id="namedview14"
-     pagecolor="#ffffff"
-     bordercolor="#000000"
-     borderopacity="0.25"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1"
-     inkscape:document-units="mm"
-     showgrid="false"
-     inkscape:zoom="5.8263889"
-     inkscape:cx="74.059595"
-     inkscape:cy="81.697259"
-     inkscape:window-width="1920"
-     inkscape:window-height="1021"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs9">
-    <rect
-       x="10.940476"
-       y="56.163943"
-       width="20.860971"
-       height="28.208501"
-       id="rect221" />
-  </defs>
-  <g
-     inkscape:label="Layer 1"
-     inkscape:groupmode="layer"
-     id="layer1">
-    <rect
-       style="fill:#000000;stroke-width:0.264583"
-       id="rect187"
-       width="38.191166"
-       height="38.241005"
-       x="-0.077248797"
-       y="-0.034920841" />
-    <text
-       xml:space="preserve"
-       transform="scale(0.26458333)"
-       id="text219"
-       style="fill:#cccccc;font-size:14.66666667px;-inkscape-font-specification:'Arial Black,  Bold';font-family:'Arial Black';font-weight:bold;white-space:pre;shape-inside:url(#rect221)" />
-    <g
-       id="g305"
-       transform="translate(2.9487399,0.44103599)">
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.87702px;font-family:'Arial Black';-inkscape-font-specification:'Arial Black,  Bold';white-space:pre;inline-size:34.0491;fill:#cccccc;stroke-width:0.264583"
-         x="7.2205663"
-         y="16.637241"
-         id="text243"
-         transform="matrix(2.7301701,0,0,4.5656862,-15.10831,-52.096458)"><tspan
-           x="7.2205663"
-           y="16.637241"
-           id="tspan323"><tspan
-             style="font-weight:normal;-inkscape-font-specification:'Arial Black, '"
-             id="tspan321">SPS
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" version="1.1" viewBox="0 0 270.93 270.93" xmlns="http://www.w3.org/2000/svg">
+<rect x="-8.5827" y="-8.8776" width="290.05" height="288.86" stroke-width=".26458"/>
+<g transform="matrix(7.0837 0 0 7.0837 18.435 2.9107)" fill="#cccccc" font-family="'Arial Black'">
+<text transform="scale(.96631 1.0349)" x="4.8131337" y="25.536442" font-size="1.7313px" stroke-width=".11804" xml:space="preserve"><tspan x="4.8131337" y="25.536442" stroke-width=".11804">Secure Password Scheme</tspan></text>
+<text transform="matrix(2.7302 0 0 4.5657 -14.641 -52.096)" x="7.2205663" y="16.637241" font-size="3.877px" font-weight="bold" stroke-width=".26458" style="inline-size:34.0491;white-space:pre" xml:space="preserve"><tspan x="7.2205663" y="16.637241"><tspan font-weight="normal">SPS
 </tspan></tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.73126px;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';fill:#cccccc;stroke-width:0.11804"
-         x="4.3785229"
-         y="25.335796"
-         id="text281"
-         transform="scale(0.96631102,1.0348635)"><tspan
-           sodipodi:role="line"
-           id="tspan279"
-           style="stroke-width:0.11804"
-           x="4.3785229"
-           y="25.335796">Secure Password Scheme</tspan></text>
-    </g>
-  </g>
+</g>
 </svg>

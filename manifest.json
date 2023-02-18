@@ -1,25 +1,24 @@
 {
   "short_name": "JLC's SPS PWA",
   "name": "JLC's Secure Password Scheme PWA",
+  "description": "An application to manage your passwords securely and accessible to all your devices without needing to store them anywhere or sync any data since they're procedurally generated (on demand).",
   "lang": "en-US",
   "start_url": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#121212",
   "theme_color": "#121212",
   "icons": [
     {
       "src": "icon.svg",
-      "sizes": "any",
-      "purpose": "maskable"
-    }, {
-      "src": "icon.svg",
+      "type": "image/svg+xml",
       "sizes": "any",
       "purpose": "any"
     }, {
-      "src": "splash.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "icon.png",
+      "type": "image/png",
+      "sizes": "any 512x512",
+      "purpose": "maskable"
     }
-  ],
-  "description": "An application to manage your passwords securely and accessible to all your devices without needing to store them anywhere or sync any data since they're procedurally generated (on demand)."
+  ]
 }

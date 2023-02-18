@@ -1,6 +1,46 @@
 
 //#region classes and functions
 
+function initLightSwitch(stylesheetId, buttonId) {
+  const stylesheet = document.getElementById(stylesheetId)
+  const lightSwitch = document.getElementById(buttonId)
+  function colorSchemeChange(dark) {
+    if (typeof dark == 'string') dark = dark == 'true'
+    stylesheet.disabled = dark
+    lightSwitch.innerText = dark ? 'Lights on' : 'Lights off'
+    localStorage.setItem('dark', dark)
+  }
+  const mql = window.matchMedia('(prefers-color-scheme: dark)')
+  mql.addEventListener('change', e => colorSchemeChange(e.matches))
+  colorSchemeChange(localStorage.getItem('dark') ?? mql.matches)
+  lightSwitch.addEventListener('click', () => colorSchemeChange(!stylesheet.disabled))
+}
+
+async function registerServiceWorker(url, options, installButtonId) {
+  let registration
+  try {
+    if ('serviceWorker' in navigator) registration = await navigator.serviceWorker.register(url, {
+      type: 'module',
+      ...options
+    })
+  } catch {} // ignore any error
+  if (registration && installButtonId) {
+    window.addEventListener('beforeinstallprompt', async e => {
+      e.preventDefault()
+      const deferredPrompt = e
+      const installButton = document.getElementById(installButtonId)
+      installButton.hidden = false
+      installButton.addEventListener('click', async () => {
+        deferredPrompt.prompt()
+        if (await deferredPrompt.userChoice == 'accepted') {
+          installButton.hidden = true
+        }
+      })
+    })
+  }
+  return registration
+}
+
 /** Cryptographically Secure Pseudo-Random Number Generator (using PBKDF2 and AES-CTR). */
 class CSPRNG {
   #aesKey; #iv; #u32buffer; #bufferIndex
@@ -324,6 +364,7 @@ function listPassword(service, iteration, password) {
   btnX.ariaLabel = 'Remove'
   pwAndLabelCon.append(label, spacer, btnCopy, btnView, pw, btnX)
   container.append(pwAndLabelCon)
+  btnCopy.focus()
   btnCopy.onclick = () => {navigator.clipboard.writeText(pw.value)}
   btnView.onclick = () => {
     if (pw.type == 'text') {
@@ -359,23 +400,22 @@ async function generatePassword() {
 }
 //#endregion
 
-try {
-  if ('serviceWorker' in navigator) await navigator.serviceWorker.register('serviceworker.js')
-  window.addEventListener("beforeinstallprompt", beforeInstallPromptEvent => {
-    beforeInstallPromptEvent.preventDefault()
-    const installButton = document.getElementById('btn_install')
-    installButton.addEventListener("click", () => {
-      beforeInstallPromptEvent.prompt()
-    })
-    installButton.hidden = false
-  })
-} catch {} // ignore any error
-
 // const log = console.log
 const [inp_person, inp_birthdate, inp_master] = document.getElementById('frm_personalSeed')
 const {inp_service, inp_login, inp_iteration} = document.getElementById('frm_serviceSeed')
 const           {frm_personalSeed,   frm_serviceSeed,   btn_downloadId,   btn_shred,   btn_generate,   inp_countdown} = 
 getElementByIds('frm_personalSeed', 'frm_serviceSeed', 'btn_downloadId', 'btn_shred', 'btn_generate', 'inp_countdown')
+
+initLightSwitch('css_light', 'btn_light')
+navigator.serviceWorker.ready.then(registration => {
+  navigator.serviceWorker.addEventListener('message', ({source, data}) => {
+    switch (data.cmd) {
+      case 'hello': document.getElementById('sw_build').innerText += ' '+data.build; break
+    }
+  })
+  registration.active.postMessage({cmd: 'hi'})
+})
+registerServiceWorker('serviceWorker.js', {}, 'btn_install')
 
 frm_personalSeed.onsubmit = (e) => {
   if (validateForms()) inp_service.focus()
