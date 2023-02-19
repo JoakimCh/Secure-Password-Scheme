@@ -28,6 +28,10 @@
   background-color: var(--back);
 }
 
+input:invalid {
+  border-color: red;
+}
+
 /* #region elements */
 /* Make inline elements be inline-block so they can have a margin. */
 b, big, i, small, tt

@@ -403,6 +403,19 @@ async function generatePassword() {
     listPassword(serviceSeed, +inp_iteration.value, await passwordGenerator.generatePassword())
   }
 }
+
+/** To fix stupid Firefox behaviour... */
+function createFocusHandler(focusoutValidator) {
+  return function() {
+    if (!focusoutValidator) focusoutValidator = this.reportValidity
+    const invalidInput = document.querySelector('input:invalid')
+    if (invalidInput && invalidInput != this) {
+      invalidInput.focus()
+    } else {
+      this.addEventListener('focusout', focusoutValidator, {once: true})
+    }
+  }
+}
 //#endregion
 
 // const log = console.log
@@ -441,9 +454,11 @@ window.addEventListener("click", resetShredderCountdown)
 btn_shred.addEventListener('click', () => location.reload())
 btn_generate.addEventListener('click', generatePassword)
 btn_downloadId.addEventListener('click', downloadFingerprint)
-inp_birthdate.addEventListener('focusout', validateBirthdate)
-inp_person.addEventListener('focusout', () => inp_person.reportValidity())
-inp_master.addEventListener('focusout', validateMasterPassword)
+inp_person.addEventListener('focus', createFocusHandler())
+inp_service.addEventListener('focus', createFocusHandler())
+inp_birthdate.addEventListener('focus', createFocusHandler(validateBirthdate))
+inp_master.addEventListener('focus', createFocusHandler(validateMasterPassword))
+
 frm_serviceSeed.addEventListener('submit', () => btn_generate.click())
 
 clearIdCanvas()
