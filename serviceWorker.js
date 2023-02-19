@@ -1,6 +1,6 @@
 
 const prefix = 'SPS' // since the origin could be shared by several PWAs
-const build = '7' // (only a change in the service worker will trigger a refresh of the cache)
+const build = '8' // (only a change in the service worker will trigger a refresh of the cache)
 const mainCache = prefix+'_main' // const mainCache = prefix+'_b'+build+'_main'
 
 self.addEventListener('message', ({source, data}) => {

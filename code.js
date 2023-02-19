@@ -231,13 +231,14 @@ function validateMasterPassword() {
   // see https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#validating_forms_using_javascript
   function reportValidity(message) {
     inp_master.setCustomValidity(message)
-    inp_master.reportValidity()
-    if (message == '') return // fix firefox from jumping to next input
-    if (inp_master == document.activeElement) { // firefox fix to actually update the message, I really hate firefox...
-      inp_master.blur()
+    const result = inp_master.reportValidity()
+    if (message != '' // fix firefox from jumping to next input
+        && inp_master == document.activeElement) {
+      inp_master.blur() // firefox fix to actually update the message, I really hate firefox...
       inp_master.focus()
       // if on Android then firefox doesn't even show these at all: https://bugzilla.mozilla.org/show_bug.cgi?id=1510450
     }
+    return result
   }
   const pw = inp_master.value
   const numUpper = pw.replace(/[^A-Z]/g, '').length
