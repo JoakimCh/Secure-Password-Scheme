@@ -1,6 +1,6 @@
 
 const prefix = 'SPS' // since the origin could be shared by several PWAs
-const build = '3' // (only a change in the service worker will trigger a refresh of the cache)
+const build = '4' // (only a change in the service worker will trigger a refresh of the cache)
 const mainCache = prefix+'_main' // const mainCache = prefix+'_b'+build+'_main'
 
 self.addEventListener('message', ({source, data}) => {
@@ -11,7 +11,7 @@ self.addEventListener('message', ({source, data}) => {
 
 self.addEventListener('install', event => {
   async function addInitialCache() {
-    await caches.delete(mainCache) // just force a refresh of it here (then we don't need to do anything in the activate event)
+    // await caches.delete(mainCache) // just force a refresh of it here (then we don't need to do anything in the activate event)
     const cache = await caches.open(mainCache)
     const urlPrefix = './' // meaning relative to the path of this service worker
     await cache.addAll([ // cache these URLs (do not cache the serviceWorker)

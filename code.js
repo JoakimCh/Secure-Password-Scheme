@@ -18,17 +18,22 @@ function initLightSwitch(stylesheetId, buttonId) {
 
 async function registerServiceWorker(url, options, installButtonId) {
   if (installButtonId) {
+    let firstPromt = true, installPrompt
     window.addEventListener('beforeinstallprompt', async e => {
-      e.preventDefault()
-      const deferredPrompt = e
-      const installButton = document.getElementById(installButtonId)
-      installButton.hidden = false
-      installButton.addEventListener('click', async () => {
-        deferredPrompt.prompt()
-        if (await deferredPrompt.userChoice == 'accepted') {
-          installButton.hidden = true
-        }
-      })
+      console.log('beforeinstallprompt')
+      installPrompt = e
+      if (firstPromt) {
+        firstPromt = false
+        e.preventDefault() // do not show
+        const installButton = document.getElementById(installButtonId)
+        installButton.hidden = false
+        installButton.addEventListener('click', async () => {
+          installPrompt.prompt()
+          if ((await installPrompt.userChoice).outcome == 'accepted') {
+            installButton.hidden = true
+          }
+        })
+      }
     })
   }
   let registration
