@@ -228,15 +228,24 @@ function normalizeInput(...input) {
 }
 
 function validateMasterPassword() {
-  const pw = inp_master.value
   // see https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation#validating_forms_using_javascript
-  inp_master.setCustomValidity('') // pass
-  if ([...pw].length < 8) inp_master.setCustomValidity('Password must be 8 or more characters!')
+  function reportValidity(message) {
+    inp_master.setCustomValidity(message)
+    inp_master.reportValidity()
+    if (message == '') return // fix firefox from jumping to next input
+    if (inp_master == document.activeElement) { // firefox fix to actually update the message, I really hate firefox...
+      inp_master.blur()
+      inp_master.focus()
+      // if on Android then firefox doesn't even show these at all: https://bugzilla.mozilla.org/show_bug.cgi?id=1510450
+    }
+  }
+  const pw = inp_master.value
   const numUpper = pw.replace(/[^A-Z]/g, '').length
-  if (numUpper < 1) inp_master.setCustomValidity('Password must contain at least 1 upper case character!')
+  if (numUpper < 1) return reportValidity('Password must contain at least 1 upper case character!')
   const numDigit = pw.replace(/[^0-9]/g, '').length
-  if (numDigit < 1) inp_master.setCustomValidity('Password must contain at least 1 number!')
-  return inp_master.reportValidity()
+  if (numDigit < 1) return reportValidity('Password must contain at least 1 number!')
+  if ([...pw].length < 8) return reportValidity('Password must be 8 or more characters!')
+  return reportValidity('') // pass it
 }
 
 function validateBirthdate() {
@@ -280,9 +289,7 @@ async function personalSeedChange(e) { // to update fingerprint
       inp_birthdate.reportValidity()
     }
   } else if (e.srcElement.name == 'inp_master') {
-    if (inp_master.validity.valid == false) {
-      validateMasterPassword()
-    }
+    validateMasterPassword()
   }
   const unlock = await personalSeedInputMutex.lock() // wait for any previous updateIdHash call to finish
     // then check if the latest input has changed before calling it again (since a lot of these input event handlers could be waiting)
