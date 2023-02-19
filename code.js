@@ -387,11 +387,11 @@ function listPassword(service, iteration, password) {
   }
 }
 
-function validateForms() {
+function validateForms(notServiceForm) {
   if (!frm_personalSeed.reportValidity()) return
   if (!validateBirthdate()) return
   if (!validateMasterPassword()) return
-  return frm_personalSeed.reportValidity() && frm_serviceSeed.reportValidity()
+  return frm_personalSeed.reportValidity() && (notServiceForm || frm_serviceSeed.reportValidity())
 }
 
 async function generatePassword() {
@@ -436,7 +436,7 @@ navigator.serviceWorker.ready.then(registration => {
 registerServiceWorker('serviceWorker.js', {}, 'btn_install')
 
 frm_personalSeed.onsubmit = (e) => {
-  if (validateForms()) inp_service.focus()
+  if (validateForms(true)) inp_service.focus()
   return false // do not submit (which would cause a reload)
 }
 inp_birthdate.onkeydown = (e) => {
