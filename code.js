@@ -1,5 +1,6 @@
 
 //#region classes and functions
+const isFirefox = navigator.userAgent.includes('Firefox') // check if buggy browser
 
 function initLightSwitch(stylesheetId, buttonId) {
   const stylesheet = document.getElementById(stylesheetId)
@@ -232,11 +233,12 @@ function validateMasterPassword() {
   function reportValidity(message) {
     inp_master.setCustomValidity(message)
     const result = inp_master.reportValidity()
-    if (message != '' // fix firefox from jumping to next input
+    if (isFirefox // Firefox fix to actually update the message
+        && message != '' // fix Firefox from jumping to next input
         && inp_master == document.activeElement) {
-      inp_master.blur() // firefox fix to actually update the message, I really hate firefox...
+      inp_master.blur()
       inp_master.focus()
-      // if on Android then firefox doesn't even show these at all: https://bugzilla.mozilla.org/show_bug.cgi?id=1510450
+      // if on Android then Firefox doesn't even show these at all: https://bugzilla.mozilla.org/show_bug.cgi?id=1510450
     }
     return result
   }
@@ -412,7 +414,7 @@ async function generatePassword() {
   }
 }
 
-/** To fix stupid Firefox behaviour... */
+/** Includes code to fix stupid Firefox behaviour... */
 function createFocusHandler(focusoutValidator) {
   return function() {
     if (!focusoutValidator) focusoutValidator = this.reportValidity
@@ -470,6 +472,6 @@ inp_master.addEventListener('focus', createFocusHandler(validateMasterPassword))
 frm_serviceSeed.addEventListener('submit', () => btn_generate.click())
 
 clearIdCanvas()
-inp_countdown.value = inp_countdown.min // firefox fix...
+inp_countdown.value = inp_countdown.min // Firefox fix...
 const passwordGenerator = new PasswordGenerator()
 // listPassword('facebook', '0', '1234567890123456789012345')
