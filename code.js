@@ -21,7 +21,6 @@ async function registerServiceWorker(url, options, installButtonId) {
   if (installButtonId) {
     let firstPromt = true, installPrompt
     window.addEventListener('beforeinstallprompt', async e => {
-      console.log('beforeinstallprompt')
       installPrompt = e
       if (firstPromt) {
         firstPromt = false
@@ -237,6 +236,7 @@ function validateMasterPassword() {
         && message != '' // fix Firefox from jumping to next input
         && inp_master == document.activeElement) {
       inp_master.blur()
+      invalidFocusout = false
       inp_master.focus()
       // if on Android then Firefox doesn't even show these at all: https://bugzilla.mozilla.org/show_bug.cgi?id=1510450
     }
@@ -415,14 +415,22 @@ async function generatePassword() {
 }
 
 /** Includes code to fix stupid Firefox behaviour... */
+let invalidFocusout
 function createFocusHandler(focusoutValidator) {
   return function() {
-    if (!focusoutValidator) focusoutValidator = this.reportValidity
-    const invalidInput = document.querySelector('input:invalid')
-    if (invalidInput && invalidInput != this) {
-      invalidInput.focus()
+    if (!isFirefox) {
+      this.addEventListener('focusout', focusoutValidator || this.reportValidity, {once: true})
     } else {
-      this.addEventListener('focusout', focusoutValidator, {once: true})
+      if (invalidFocusout && invalidFocusout != this) {
+        invalidFocusout = false // reset
+      } else {
+        this.addEventListener('focusout', function() {
+          if (!(focusoutValidator ? focusoutValidator() : this.reportValidity())) {
+            invalidFocusout = this
+            setTimeout(this.focus.bind(this), 0) // then set it back
+          }
+        }, {once: true})
+      }
     }
   }
 }
