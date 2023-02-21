@@ -65,7 +65,7 @@ If you're worried about [keyloggers](https://en.wikipedia.org/wiki/Keystroke_log
 
 ### Business usage
 
-For usage within a business or larger company I recommend the offline password generation I described above. But together with a trust structure where only a few people know enough to be able to generate the passwords and then to only share the generated passwords with people when they need to use them. E.g. when someone request access to an account they can signal such a person to get the password and preferably receive them using [any messaging app with support for self-destructing messages](https://www.popsci.com/send-self-destructing-messages/).
+For usage within a business or larger company I recommend the offline password generation I described above. But together with a trust structure where only a few people know enough to be able to generate the passwords and then to only share the generated passwords with people when they need to use them. E.g. when someone request access to an account they could signal such a person to get the password and (preferably) receive it using [any messaging app with support for self-destructing messages](https://www.popsci.com/send-self-destructing-messages/).
 
 ## Terms of agreement
 
